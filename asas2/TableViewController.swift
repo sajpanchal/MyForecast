@@ -1,17 +1,16 @@
 //
-//  ViewController.swift
+//  TableViewController.swift
 //  asas2
 //
-//  Created by saj panchal on 2020-04-08.
+//  Created by saj panchal on 2020-04-04.
 //  Copyright © 2020 saj panchal. All rights reserved.
 //
 
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController, UITableViewDataSource, CLLocationManagerDelegate {
+class TableViewController: UITableViewController, CLLocationManagerDelegate {
     let lm = CLLocationManager()
-    var userDefault = UserDefaults.standard
     var currentLatitude : Double?
     var currentLongitude : Double?
     var modifiedDate : [String] = []
@@ -20,7 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     var currUnixDate : UInt64 = 0
     var prevUnixDate : UInt64 = 0
     var dayIndex : Int = 0
-    var difference : UInt64 = 0
+    var diff : UInt64 = 0
     var weatherImgString: [String] = []
     var listIndex = 0
     var weatherDataCounts : Int?
@@ -40,12 +39,9 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     var tempUnitSymbol : String = " °C"
     var speedUnitSymbol : String = "km/h"
     var speedCnvtMuliplier : Double = 3.6
-    var documentDirectoryUrl : URL?
-    var home : URL?
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tempSegment: UISegmentedControl!
+    @IBOutlet weak var segmentControlBtn: UISegmentedControl!
     
-    
+
     struct JSonWeatherData: Codable
     {
         let list: [List]
@@ -57,7 +53,8 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
         let name : String
         let sunrise: UInt
         let sunset: UInt
-    }
+   }
+  
     struct List: Codable
     {
         let dt : UInt64
@@ -75,7 +72,7 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     }
     struct Wind: Codable
     {
-        let speed: Double
+      let speed: Double
     }
     struct Weather: Codable
     {
@@ -83,40 +80,15 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
         let icon : String
         let main : String
     }
-     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        home = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        documentDirectoryUrl = home?.appendingPathComponent("myData.plist")
-        
-        tableView.dataSource = self
-        tableView.rowHeight = 90
         resetAppData()
         lm.delegate = self
         lm.requestWhenInUseAuthorization()
         lm.startUpdatingLocation()
-        dateFormatter.dateFormat = "E, MMM d, yyyy"
-    }
-    
-    @IBAction func tempSegmentCntl(_ sender: Any)
-    {
-        if tempSegment.selectedSegmentIndex == 0
-        {
-            scaleUnit = "metric"
-            tempUnitSymbol = "°C"
-            speedUnitSymbol = "km/h"
-            speedCnvtMuliplier = 3.6
-        }
-        else if tempSegment.selectedSegmentIndex == 1
-        {
-            scaleUnit = "imperial"
-            tempUnitSymbol = "°F"
-            speedUnitSymbol = "mph"
-            speedCnvtMuliplier = 1
-        }
-        resetAppData()
-        decodeJsonScript()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        print("dateFormat",dateFormatter.dateFormat)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
@@ -133,158 +105,99 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
         decodeJsonScript()
     }
     
+    @IBAction func tempSegmentCtrl(_ sender: Any)
+    {
+        if segmentControlBtn.selectedSegmentIndex == 0
+        {
+            scaleUnit = "metric"
+            tempUnitSymbol = "°C"
+            speedUnitSymbol = "km/h"
+            speedCnvtMuliplier = 3.6
+        }
+        else if segmentControlBtn.selectedSegmentIndex == 1
+        {
+            scaleUnit = "imperial"
+            tempUnitSymbol = "°F"
+            speedUnitSymbol = "mph"
+            speedCnvtMuliplier = 1
+        }
+        resetAppData()
+        decodeJsonScript()
+    }
+    
     func decodeJsonScript() -> Void
     {
         if(currentLatitude != nil && currentLongitude != nil)
         {
             /* Step 1: set URL to call API */
             let urlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(currentLatitude!)&lon=\(currentLongitude!)&appid=1b60117972a076022caad8a5c23bb464&units=\(scaleUnit)"
+            print(urlString)
             /* Step 2: Create URL session */
             let urlSession = URLSession(configuration: .default)
             let url = URL(string: urlString)
-            var readableData : JSonWeatherData?
-            
             if let url = url
             {
                 /* Step 3: give URL session a data task */
                 let dataTask = urlSession.dataTask(with: url)
                 {
                     (data, response, error) in
-                    if let error = error
-                    {
-                            print("Error code :\n",error)
-                           // readableData = self.loadData()
-                            readableData = self.readData()
-                            self.filterDailyWeatherData(readableData!)
-                    }
-                    else if let data = data
+                    if let data = data
                     {
                         let jsonDecode = JSONDecoder()
-                        do
-                        {
-                            readableData = try jsonDecode.decode(JSonWeatherData.self, from: data)
-                           // self.saveData(readableData!)
-                            self.writeData(readableData!)
-                            self.filterDailyWeatherData(readableData!)
-                        }
-                        catch
-                        {
-                            print("Latest data is not available. Loading last saved data....")
-                           // readableData = self.loadData()
-                            readableData = self.readData()
-                            self.filterDailyWeatherData(readableData!)
-                        }
+                   
+                    do
+                    {
+                        let readableData = try jsonDecode.decode(JSonWeatherData.self, from: data)
+                        self.filterDailyWeatherData(readableData)
+                    }
+                    catch
+                    {
+                        print("I Can't decode your data")
                     }
                 }
-                    dataTask.resume()
             }
-            //print("userdefault:\n",readableData!)
+                dataTask.resume()
         }
     }
+}
     
-    func saveData(_ readableData: JSonWeatherData)
-    {
-         /* Setting the structure data to userdefault */
-        let encoder = PropertyListEncoder()
-        do
-        {
-            let encodedData = try encoder.encode(readableData)
-            self.userDefault.set(encodedData, forKey: "jsonData")
-        }
-        catch
-        {
-            print("can't encode the data.")
-        }
-    }
-    func loadData() -> JSonWeatherData
-    {
-        let decoder = PropertyListDecoder()
-        var myUserDefault2 : JSonWeatherData?
-        do
-        {
-        /* Loading the encoded data from userdefault to a structure */
-        let myUserDefault = self.userDefault.object(forKey: "jsonData") as? Data
-        let decodedData = try decoder.decode(JSonWeatherData.self, from: myUserDefault!)
-        /* Loading the decoded data from encoded structure */
-        myUserDefault2 = decodedData
-        }
-        catch
-        {
-            print("Can't decode the data.")
-        }
-        return myUserDefault2!
-    }
-    
-    func writeData(_ readableData: JSonWeatherData)
-    {
-        let encoder = PropertyListEncoder()
-        do
-        {
-            let data = try encoder.encode(readableData)
-            do
-            {
-                try data.write(to: documentDirectoryUrl!)
-            }
-            catch
-            {
-                print("I can't write.")
-            }
-        }
-        catch
-        {
-            print("I can't decode.")
-        }
-    }
-    func readData() -> JSonWeatherData
-    {
-       // let documentDirectoryPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        var readableData : JSonWeatherData?
-        let decoder = PropertyListDecoder()
-        do
-        {
-            let dataRead = try Data(contentsOf: documentDirectoryUrl!)
-            do
-            {
-                readableData = try decoder.decode(JSonWeatherData.self, from: dataRead)
-            }
-            catch
-            {
-                print("I can't decode it.")
-            }
-        }
-        catch
-        {
-            print("I can't read it.")
-        }
-        return readableData!
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return dayIndex
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        print("index",index)
+        return dayIndex
+    }
+
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCell
+      
         if !(currentTemp.isEmpty)
         {
             cell.tempLabel.text = currentTemp[indexPath.row] + tempUnitSymbol
+            print("cell called:",currentTemp[indexPath.row])
         }
         if !(weatherCondition.isEmpty)
         {
             cell.weatherConditionLabel.text = weatherCondition[indexPath.row]
             cell.weatherImage.image = UIImage(named: (weatherImgString[indexPath.row]) + ".png")
         }
-        
+  
         if !(modifiedDate.isEmpty)
         {
             cell.dateLabel.text = modifiedDate[indexPath.row]
         }
+        
         return cell
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         let destination = segue.destination as! DailyViewController
@@ -308,30 +221,36 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     
     func filterDailyWeatherData(_ readableData: JSonWeatherData)
     {
-        
+     
         DispatchQueue.main.async
+        {
+            self.weatherDataCounts = readableData.cnt
+          while self.listIndex < (self.weatherDataCounts! - 1)
+          {
+            self.currUnixDate = readableData.list[self.listIndex].dt
+            self.diff = self.currUnixDate - self.prevUnixDate
+            if self.diff >= 86400
             {
-                self.weatherDataCounts = readableData.cnt
-                while self.listIndex < (self.weatherDataCounts! - 1)
-                {
-                    self.currUnixDate = readableData.list[self.listIndex].dt
-                    self.difference = self.currUnixDate - self.prevUnixDate
-                    if self.difference >= 86400
-                    {
-                        self.updateAppWeatherData(readableData)
-                    }
-                    self.listIndex += 1
-                }
-                self.tableView.reloadData()
+                self.updateAppWeatherData(readableData)
+            }
+            self.listIndex += 1
+          }
+            self.tableView.reloadData()
+            print("table refreshed")
         }
     }
     func updateAppWeatherData(_ readableData: JSonWeatherData) -> Void
     {
-        self.date1 = Date(timeIntervalSince1970: TimeInterval(readableData.list[self.listIndex].dt))
-        self.modifiedDate.append(self.dateFormatter.string(from: self.date1!))
+       self.date1 = Date(timeIntervalSince1970: TimeInterval(readableData.list[self.listIndex].dt))
+              self.modifiedDate.append(self.dateFormatter.string(from: self.date1!))
+        print("Date:",self.dateFormatter.string(from: self.date1!))
         self.prevUnixDate = self.currUnixDate
-        self.weatherCondition.append(readableData.list[self.listIndex].weather[0].description)
+       
+        self.weatherCondition.append(readableData.list[self.listIndex].weather[0].description) //weathercondtion [0,1,2,3,4] //list[0...39]
         self.currentTemp.append(String(readableData.list[self.listIndex].main.temp))
+        print("temp:",readableData.list[self.listIndex].main.temp)
+        print("index:",self.listIndex)
+        print("array", currentTemp)
         self.weatherImgString.append(String(readableData.list[self.listIndex].weather[0].icon))
         self.cityString.append(readableData.city.name)
         self.weatherName.append(readableData.list[self.listIndex].weather[0].main)
@@ -344,6 +263,8 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
         self.dayIndex += 1
     }
     
+    
+    
     func resetAppData() -> Void
     {
         modifiedDate.removeAll()
@@ -352,7 +273,7 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
         currUnixDate = 0
         prevUnixDate = 0
         dayIndex = 0
-        difference = 0
+        diff = 0
         weatherImgString.removeAll()
         listIndex = 0
         weatherDataCounts = 0
@@ -366,9 +287,58 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
         pressureInt.removeAll()
         dt.removeAll()
     }
-
     
     
+    
+    
+    
+    
+    
+    
+    
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
 
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }

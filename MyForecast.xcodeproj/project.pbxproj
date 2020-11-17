@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		72109FDF2438F748000E9C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72109FDE2438F748000E9C25 /* AppDelegate.swift */; };
 		72109FE12438F748000E9C25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72109FE02438F748000E9C25 /* SceneDelegate.swift */; };
-		72109FE32438F748000E9C25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72109FE22438F748000E9C25 /* ViewController.swift */; };
 		72109FE62438F748000E9C25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72109FE42438F748000E9C25 /* Main.storyboard */; };
 		72109FE82438F749000E9C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72109FE72438F749000E9C25 /* Assets.xcassets */; };
 		72109FEB2438F749000E9C25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72109FE92438F749000E9C25 /* LaunchScreen.storyboard */; };
 		72109FF62438F749000E9C25 /* asas2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72109FF52438F749000E9C25 /* asas2Tests.swift */; };
 		7210A0012438F74A000E9C25 /* asas2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7210A0002438F74A000E9C25 /* asas2UITests.swift */; };
+		7210A01524390447000E9C25 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7210A01424390447000E9C25 /* TableViewCell.swift */; };
+		723882E7243A814800B162F5 /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723882E6243A814800B162F5 /* DailyViewController.swift */; };
+		72D363CE243E765300081F20 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D363CD243E765300081F20 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +37,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		72109FDB2438F748000E9C25 /* asas2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = asas2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72109FDB2438F748000E9C25 /* MyForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72109FDE2438F748000E9C25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72109FE02438F748000E9C25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		72109FE22438F748000E9C25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		72109FE52438F748000E9C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		72109FE72438F749000E9C25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72109FEA2438F749000E9C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72109FEC2438F749000E9C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72109FF12438F749000E9C25 /* asas2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = asas2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		72109FF12438F749000E9C25 /* MyForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyForecastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72109FF52438F749000E9C25 /* asas2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = asas2Tests.swift; sourceTree = "<group>"; };
 		72109FF72438F749000E9C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72109FFC2438F74A000E9C25 /* asas2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = asas2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		72109FFC2438F74A000E9C25 /* MyForecastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyForecastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7210A0002438F74A000E9C25 /* asas2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = asas2UITests.swift; sourceTree = "<group>"; };
 		7210A0022438F74A000E9C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7210A01424390447000E9C25 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		723882E6243A814800B162F5 /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
+		72D363CD243E765300081F20 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,9 +93,9 @@
 		72109FDC2438F748000E9C25 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				72109FDB2438F748000E9C25 /* asas2.app */,
-				72109FF12438F749000E9C25 /* asas2Tests.xctest */,
-				72109FFC2438F74A000E9C25 /* asas2UITests.xctest */,
+				72109FDB2438F748000E9C25 /* MyForecast.app */,
+				72109FF12438F749000E9C25 /* MyForecastTests.xctest */,
+				72109FFC2438F74A000E9C25 /* MyForecastUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,7 +105,9 @@
 			children = (
 				72109FDE2438F748000E9C25 /* AppDelegate.swift */,
 				72109FE02438F748000E9C25 /* SceneDelegate.swift */,
-				72109FE22438F748000E9C25 /* ViewController.swift */,
+				72D363CD243E765300081F20 /* ViewController.swift */,
+				7210A01424390447000E9C25 /* TableViewCell.swift */,
+				723882E6243A814800B162F5 /* DailyViewController.swift */,
 				72109FE42438F748000E9C25 /* Main.storyboard */,
 				72109FE72438F749000E9C25 /* Assets.xcassets */,
 				72109FE92438F749000E9C25 /* LaunchScreen.storyboard */,
@@ -131,9 +137,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		72109FDA2438F748000E9C25 /* asas2 */ = {
+		72109FDA2438F748000E9C25 /* MyForecast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7210A0052438F74A000E9C25 /* Build configuration list for PBXNativeTarget "asas2" */;
+			buildConfigurationList = 7210A0052438F74A000E9C25 /* Build configuration list for PBXNativeTarget "MyForecast" */;
 			buildPhases = (
 				72109FD72438F748000E9C25 /* Sources */,
 				72109FD82438F748000E9C25 /* Frameworks */,
@@ -143,14 +149,14 @@
 			);
 			dependencies = (
 			);
-			name = asas2;
+			name = MyForecast;
 			productName = asas2;
-			productReference = 72109FDB2438F748000E9C25 /* asas2.app */;
+			productReference = 72109FDB2438F748000E9C25 /* MyForecast.app */;
 			productType = "com.apple.product-type.application";
 		};
-		72109FF02438F749000E9C25 /* asas2Tests */ = {
+		72109FF02438F749000E9C25 /* MyForecastTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7210A0082438F74A000E9C25 /* Build configuration list for PBXNativeTarget "asas2Tests" */;
+			buildConfigurationList = 7210A0082438F74A000E9C25 /* Build configuration list for PBXNativeTarget "MyForecastTests" */;
 			buildPhases = (
 				72109FED2438F749000E9C25 /* Sources */,
 				72109FEE2438F749000E9C25 /* Frameworks */,
@@ -161,14 +167,14 @@
 			dependencies = (
 				72109FF32438F749000E9C25 /* PBXTargetDependency */,
 			);
-			name = asas2Tests;
+			name = MyForecastTests;
 			productName = asas2Tests;
-			productReference = 72109FF12438F749000E9C25 /* asas2Tests.xctest */;
+			productReference = 72109FF12438F749000E9C25 /* MyForecastTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		72109FFB2438F74A000E9C25 /* asas2UITests */ = {
+		72109FFB2438F74A000E9C25 /* MyForecastUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7210A00B2438F74A000E9C25 /* Build configuration list for PBXNativeTarget "asas2UITests" */;
+			buildConfigurationList = 7210A00B2438F74A000E9C25 /* Build configuration list for PBXNativeTarget "MyForecastUITests" */;
 			buildPhases = (
 				72109FF82438F74A000E9C25 /* Sources */,
 				72109FF92438F74A000E9C25 /* Frameworks */,
@@ -179,9 +185,9 @@
 			dependencies = (
 				72109FFE2438F74A000E9C25 /* PBXTargetDependency */,
 			);
-			name = asas2UITests;
+			name = MyForecastUITests;
 			productName = asas2UITests;
-			productReference = 72109FFC2438F74A000E9C25 /* asas2UITests.xctest */;
+			productReference = 72109FFC2438F74A000E9C25 /* MyForecastUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +213,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 72109FD62438F748000E9C25 /* Build configuration list for PBXProject "asas2" */;
+			buildConfigurationList = 72109FD62438F748000E9C25 /* Build configuration list for PBXProject "MyForecast" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -220,9 +226,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				72109FDA2438F748000E9C25 /* asas2 */,
-				72109FF02438F749000E9C25 /* asas2Tests */,
-				72109FFB2438F74A000E9C25 /* asas2UITests */,
+				72109FDA2438F748000E9C25 /* MyForecast */,
+				72109FF02438F749000E9C25 /* MyForecastTests */,
+				72109FFB2438F74A000E9C25 /* MyForecastUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -259,9 +265,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72109FE32438F748000E9C25 /* ViewController.swift in Sources */,
+				72D363CE243E765300081F20 /* ViewController.swift in Sources */,
 				72109FDF2438F748000E9C25 /* AppDelegate.swift in Sources */,
+				7210A01524390447000E9C25 /* TableViewCell.swift in Sources */,
 				72109FE12438F748000E9C25 /* SceneDelegate.swift in Sources */,
+				723882E7243A814800B162F5 /* DailyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,12 +294,12 @@
 /* Begin PBXTargetDependency section */
 		72109FF32438F749000E9C25 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 72109FDA2438F748000E9C25 /* asas2 */;
+			target = 72109FDA2438F748000E9C25 /* MyForecast */;
 			targetProxy = 72109FF22438F749000E9C25 /* PBXContainerItemProxy */;
 		};
 		72109FFE2438F74A000E9C25 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 72109FDA2438F748000E9C25 /* asas2 */;
+			target = 72109FDA2438F748000E9C25 /* MyForecast */;
 			targetProxy = 72109FFD2438F74A000E9C25 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -435,6 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4G67KLBRN;
 				INFOPLIST_FILE = asas2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -452,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4G67KLBRN;
 				INFOPLIST_FILE = asas2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -481,7 +491,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/asas2.app/asas2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyForecast.app/MyForecast";
 			};
 			name = Debug;
 		};
@@ -502,7 +512,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/asas2.app/asas2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyForecast.app/MyForecast";
 			};
 			name = Release;
 		};
@@ -510,7 +520,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4G67KLBRN;
 				INFOPLIST_FILE = asas2UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -529,7 +541,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4G67KLBRN;
 				INFOPLIST_FILE = asas2UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -547,7 +561,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		72109FD62438F748000E9C25 /* Build configuration list for PBXProject "asas2" */ = {
+		72109FD62438F748000E9C25 /* Build configuration list for PBXProject "MyForecast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7210A0032438F74A000E9C25 /* Debug */,
@@ -556,7 +570,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7210A0052438F74A000E9C25 /* Build configuration list for PBXNativeTarget "asas2" */ = {
+		7210A0052438F74A000E9C25 /* Build configuration list for PBXNativeTarget "MyForecast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7210A0062438F74A000E9C25 /* Debug */,
@@ -565,7 +579,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7210A0082438F74A000E9C25 /* Build configuration list for PBXNativeTarget "asas2Tests" */ = {
+		7210A0082438F74A000E9C25 /* Build configuration list for PBXNativeTarget "MyForecastTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7210A0092438F74A000E9C25 /* Debug */,
@@ -574,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7210A00B2438F74A000E9C25 /* Build configuration list for PBXNativeTarget "asas2UITests" */ = {
+		7210A00B2438F74A000E9C25 /* Build configuration list for PBXNativeTarget "MyForecastUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7210A00C2438F74A000E9C25 /* Debug */,
