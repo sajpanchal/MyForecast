@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     var speedCnvtMuliplier : Double = 3.6
     var documentDirectoryUrl : URL?
     var home : URL?
-    var activityView = UIActivityIndicatorView(style: .whiteLarge)
+    var activityView = UIActivityIndicatorView(style: .large)
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tempSegment: UISegmentedControl!
     
@@ -90,12 +90,13 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
         super.viewDidLoad()
         
         activityView.center = self.view.center
+        
         self.view.addSubview(activityView)
         NSLog("the view: %@", self.view)
         print("heelo")
         home = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         documentDirectoryUrl = home?.appendingPathComponent("myData.plist")
-    
+        
         tableView.dataSource = self
         tableView.rowHeight = 90
         resetAppData()
