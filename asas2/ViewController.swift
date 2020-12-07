@@ -42,6 +42,7 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     var speedCnvtMuliplier : Double = 3.6
     var documentDirectoryUrl : URL?
     var home : URL?
+    var activityView = UIActivityIndicatorView(style: .whiteLarge)
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tempSegment: UISegmentedControl!
     
@@ -87,9 +88,14 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        activityView.center = self.view.center
+        self.view.addSubview(activityView)
+        NSLog("the view: %@", self.view)
+        print("heelo")
         home = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         documentDirectoryUrl = home?.appendingPathComponent("myData.plist")
-        
+    
         tableView.dataSource = self
         tableView.rowHeight = 90
         resetAppData()
@@ -101,22 +107,40 @@ class ViewController: UIViewController, UITableViewDataSource, CLLocationManager
     
     @IBAction func tempSegmentCntl(_ sender: Any)
     {
+        self.activityView.startAnimating()
         if tempSegment.selectedSegmentIndex == 0
         {
-            scaleUnit = "metric"
-            tempUnitSymbol = "°C"
-            speedUnitSymbol = "km/h"
-            speedCnvtMuliplier = 3.6
+            
+                
+                self.scaleUnit = "metric"
+                self.tempUnitSymbol = "°C"
+                self.speedUnitSymbol = "km/h"
+                self.speedCnvtMuliplier = 3.6
+                
+            
         }
         else if tempSegment.selectedSegmentIndex == 1
         {
-            scaleUnit = "imperial"
-            tempUnitSymbol = "°F"
-            speedUnitSymbol = "mph"
-            speedCnvtMuliplier = 1
+           
+                
+                self.scaleUnit = "imperial"
+                self.tempUnitSymbol = "°F"
+                self.speedUnitSymbol = "mph"
+                self.speedCnvtMuliplier = 1
+              
+            
         }
-        resetAppData()
-        decodeJsonScript()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        
+        self.resetAppData()
+      
+        
+    }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // Change `2.0` to the desired number of seconds.
+            self.decodeJsonScript()
+            self.activityView.stopAnimating()
+        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
