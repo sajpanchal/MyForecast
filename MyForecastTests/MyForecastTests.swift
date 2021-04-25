@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import asas2
+@testable import MyForecast
 
-class asas2Tests: XCTestCase {
+class MyForecastTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
